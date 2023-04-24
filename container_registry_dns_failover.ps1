@@ -31,6 +31,9 @@ Set-AzPrivateDnsRecordSet -RecordSet $RecordSet_secondary_region
 
 #The below commands removes the old IP from the DNS recordset
 #$RecordSet = Get-AzPrivateDnsRecordSet -Name $container_registry_private_dns_zone_record_name -RecordType A -ResourceGroupName $private_dns_zone_resource_group_name -ZoneName $container_registry_private_dns_zone_name
+$RecordSet_global = Get-AzPrivateDnsRecordSet -ResourceGroupName $private_dns_zone_resource_group_name -ZoneName $container_registry_private_dns_zone_name -Name $container_registry_private_dns_zone_global_record_name -RecordType A
+$RecordSet_primary_region = Get-AzPrivateDnsRecordSet -ResourceGroupName $private_dns_zone_resource_group_name -ZoneName $container_registry_private_dns_zone_name -Name $container_registry_private_dns_zone_primary_region_record_name -RecordType A
+$RecordSet_secondary_region = Get-AzPrivateDnsRecordSet -ResourceGroupName $private_dns_zone_resource_group_name -ZoneName $container_registry_private_dns_zone_name -Name $container_registry_private_dns_zone_secondary_region_record_name -RecordType A
 
 #Remove-AzPrivateDnsRecordConfig -RecordSet $RecordSet -Ipv4Address $container_registry_primary_private_endpoint_IP
 Remove-AzPrivateDnsRecordConfig -RecordSet $RecordSet_global -Ipv4Address $container_registry_global_endpoint_primary_region_IP
